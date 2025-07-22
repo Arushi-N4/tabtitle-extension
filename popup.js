@@ -1,4 +1,9 @@
-document.getElementById('getTitle').addEventListener('click', async () => {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    document.getElementById('titleOutput').textContent = tab.title;
+document.getElementById('getTitle').addEventListener('click', () => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const tab = tabs[0];
+        const title = tab.title;
+        const output = document.getElementById('titleOutput');
+        output.textContent = title;
+        output.style.display = 'block';
+    });
 });
